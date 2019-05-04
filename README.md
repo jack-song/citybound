@@ -1,4 +1,12 @@
-<img src="cb.png" alt="Citybound" width="192"/>
+- understand how time and traffic works (how does a car drive?)
+- new module for best effort collision detection and n^2 iteraction
+- build play harness for easier to embed, test, and iterate on gameplay? Rust? WASM? actors?
+- requirements come from ^ new module requirements, how time and traffic works
+- convert plan & construction into controls
+
+Look Into:
+backpressure
+frame counting
 
 Citybound is a city building game with a focus on realism, collaborative planning and simulation of microscopic details. It is independently developed, open source and funded through Patreon.
 

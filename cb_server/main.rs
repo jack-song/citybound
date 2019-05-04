@@ -34,6 +34,7 @@ fn main() {
 
         let world = &mut system.world();
 
+        // Set up components of the world, simulation.
         log::spawn(world);
         let time = time::spawn(world);
         let plan_manager = planning::spawn(world);
@@ -43,23 +44,27 @@ fn main() {
         environment::vegetation::spawn(world, plan_manager);
         system.process_all_messages();
 
+        // Set up the main loop.
         let mut frame_counter = init::FrameCounter::new();
         let mut skip_turns = 0;
 
         loop {
             frame_counter.start_frame();
 
+            // 1. Run PENDING MESSAGES.
             system.process_all_messages();
 
             if system.shutting_down {
                 break;
             }
 
+            // 2. Run TIME SIMULATION.
             if skip_turns == 0 {
                 time.progress(world);
                 system.process_all_messages();
             }
 
+            // 3. Run NETWORK MESSAGES.
             system.networking_send_and_receive();
             system.process_all_messages();
 
